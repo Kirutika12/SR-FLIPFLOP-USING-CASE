@@ -1,14 +1,14 @@
 # SR-FLIPFLOP-USING-CASE
 
-**AIM:**
+## **AIM:**
 
 To implement  SR flipflop using verilog and validating their functionality using their functional tables
 
-**SOFTWARE REQUIRED:**
+## **SOFTWARE REQUIRED:**
 
 Quartus prime
 
-**THEORY**
+## **THEORY**
 
 SR Flip-Flop SR flip-flop operates with only positive clock transitions or negative clock transitions. Whereas, SR latch operates with enable signal. The circuit diagram of SR flip-flop is shown in the following figure.
 
@@ -32,17 +32,51 @@ By using three variable K-Map, we can get the simplified expression for next sta
  
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is Q(t+1)=S+R′Q(t)Q(t+1)=S+R′Q(t)
 
-**Procedure**
+## **Procedure**
 
 /* write all the steps invloved */
+1.	Type the program in Quartus software.
 
-**PROGRAM**
+2.	Compile and run the program.
+
+3.	Generate the RTL schematic and save the logic diagram.
+
+4.	Create nodes for inputs and outputs to generate the timing diagram.
+
+5.	For different input combinations generate the timing diagram.
+
+ ## **PROGRAM**
 
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
+ ```module sr(
+  input clk, rst_n,
+  input s,r,
+  output reg q,
+  output q_bar
+  );
+  
+  // always@(posedge clk or negedge rst_n) // for asynchronous reset
+  always@(posedge clk) begin // for synchronous reset
+    if(!rst_n) q <= 0;
+    else begin
+      case({s,r})
+        2'b00: q <= q;    // No change
+        2'b01: q <= 1'b0; // reset
+        2'b10: q <= 1'b1; // set
+        2'b11: q <= 1'bx; // Invalid inputs
+      endcase
+    end
+  end
+  assign q_bar = ~q;
+endmodule 
+```
+### Developed by: Kirutika KR 
+### RegisterNumber: 24001080
+## **RTL LOGIC FOR FLIPFLOPS**
+![SR logic diagram](https://github.com/user-attachments/assets/272d1437-7c4d-4a1e-94df-da385a46d577)
 
-**RTL LOGIC FOR FLIPFLOPS**
+## **TIMING DIGRAMS FOR FLIP FLOPS**
+![exp 6 wf](https://github.com/user-attachments/assets/eccae997-3498-4f98-be0f-9ecdc5d7c015)
 
-**TIMING DIGRAMS FOR FLIP FLOPS**
-
-**RESULTS**
+## **RESULTS**
+Thus the flip flop designed and the truth table is verified  in Quartus II using verilog programming. 
